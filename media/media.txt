@@ -1,0 +1,1 @@
+En este directorio se almacenaran todos los archivos multimedia que almacenara el servidor
