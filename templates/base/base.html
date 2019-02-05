@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}AdminLTE 2 | Dashboard{% endblock title %}</title>
+  
+  {% block meta %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- favicon settings -->
+  <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+  <link rel="icon" href="{% static "favicon.ico" %}"> 
+  {% endblock meta %}
+  
+  {% block stylesheets %}
+  {% include "base/components/_styles.html" %}
+  {% endblock stylesheets %}
+
+  {% block extra_head %}{% endblock extra_head %}
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+{% block nav_header %}
+{% include "base/components/_header.html" %}
+{% endblock nav_header %}
+
+{% block nav_sidebar %}
+{% include "base/components/_sidebar.html" %}
+{% endblock nav_sidebar %}
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        {% block page_name %}Dashboard{% endblock page_name %}
+        <small>{% block page_description %}Version 2.0{% endblock page_description %}</small>
+      </h1>
+    {% block breadcrumbs %}
+    {% comment %}
+    <!-- Breadcrumb implementation left to developers; an example of breadcrumb -->
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol> 
+    {% endcomment %}
+    {% endblock breadcrumbs %}
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+    {% block content %}
+    
+    {% endblock content %}
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+{% block footer %}
+{% include "base/components/_footer.html" %}
+{% endblock footer %}
+
+  
+
+</div>
+<!-- ./wrapper -->
+
+{% block javascript %}
+{% include "base/components/_scripts.html" %}
+{% endblock javascript %}
+
+{% block extra_foot %}
+{% endblock extra_foot %}
+</body>
+</html>
