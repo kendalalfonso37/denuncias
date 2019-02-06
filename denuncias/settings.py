@@ -103,6 +103,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -139,5 +146,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #AUTH_USER_MODEL = 'Farmacia.User'
 
 # URLS para redireccionamiento de 
-LOGIN_URL = '/users/login/'
+LOGIN_URL = ''
 LOGIN_REDIRECT_URL = '/'
