@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Denuncias.sv</title>
+
+  <!-- Bootstrap core CSS -->
+{% load static %}
+  <link href="{% static 'css/vendor/bootstrap/css/bootstrap.min.css' %} " rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/scrolling-nav.css' %} " rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="{% url 'home' %}">El Salvador </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url 'home' %}">Quejas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url 'log_in' %}">Log in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url 'sign_up' %}">Sign up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Bienvenido a tu página de quejas</h1>
+      <p class="lead">Si algo no te gusta lo decis y ya, o en buen salvadoreño ponele el dedo por rata..</p>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Acerca de está página</h2>
+          <p class="lead">Este sitio web fue creado para fines educativos y sin fines de lucro aunque siempre es bien recibida tu colaboración :V, por favor lee la siguientes indicaciones:</p>
+          <ul>
+            <li>Puedes ver la quejas publicadas por otros usuarios pero para comentar debes iniciar sesión para lo cual debiste haber creado una cuenta</li>
+            <li>Si quieres publicar tus quejas, puedes hacerlo pero primero crea una cuenta!</li>
+            <li>Por favor, respeta la opinión de los demás, o podrias ser baneado por un administrador.</li>
+            <li>Las quejas son atendidas entre más likes tienen! quejas con menor cantidad de likes serán atendidas más lentamente.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>El servicio que ofrecemos</h2>
+          <p class="lead">No publicaremos, ni delateremos tu identidad a ningún usuario por tu seguridad, ya que estamos conscientes que prefieres algo de anonimato.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Contactanos</h2>
+          <p class="lead">Quieres saber sobre nosotros, pues no lo harás :v.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Denuncias.sv 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+
+</body>
+
+</html>

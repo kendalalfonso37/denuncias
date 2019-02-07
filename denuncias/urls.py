@@ -25,7 +25,7 @@ from apps.user import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='base/base.html'),name="home"),
+    path('', TemplateView.as_view(template_name='base/main.html'),name="home"),
     path('login', views.LoginView.as_view(), name="log_in"),
     path('signup', views.Signup.as_view(), name="sign_up")
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
