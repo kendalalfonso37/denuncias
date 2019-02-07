@@ -275,3 +275,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/linux,python,django,windows,virtualenv,sublimetext,visualstudiocode
+denuncias/__pycache__/__init__.cpython-37.pyc
+denuncias/__pycache__/urls.cpython-37.pyc
+denuncias/__pycache__/settings.cpython-37.pyc
+denuncias/__pycache__/wsgi.cpython-37.pyc
+denuncias/__pycache__/*
