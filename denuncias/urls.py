@@ -22,10 +22,14 @@ from django.conf.urls.static import static
 from django.views.generic.base import RedirectView
 from django.views.generic import TemplateView
 from apps.user import views
+from apps.session.views import SessionView
+from apps.session.views import logoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='base/main.html'),name="home"),
+    path('', views.main, name="home"),
     path('login', views.LoginView.as_view(), name="log_in"),
-    path('signup', views.Signup.as_view(), name="sign_up")
+    path('signup', views.Signup.as_view(), name="sign_up"),
+    path("session", SessionView, name="logged_in"),
+    path("logout", logoutView, name="log_out")
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

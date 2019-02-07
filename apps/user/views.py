@@ -6,6 +6,9 @@ from django.contrib import messages
 import bcrypt
 # Create your views here.
 
+def main(request):
+    return render(request, 'base/main.html')
+
 class LoginView(TemplateView):
     template_name = "main.html"
 
@@ -15,12 +18,14 @@ class LoginView(TemplateView):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('logged_in')
         else:
             messages.add_message(request, messages.ERROR, 'Error, something went wrong')
             return render(request, 'user/login.html')
 
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('logged_in')
         return render(request, "user/login.html")
 
 class Signup(TemplateView):
@@ -52,6 +57,3 @@ class Signup(TemplateView):
     
     def get(self, request):
         return render(request, "user/signup.html")
-
-    def logoutView(self, request):
-        logout(request)
