@@ -1,0 +1,29 @@
+.back{
+    -webkit-box-shadow: 3px -4px 28px 10px rgba(107, 160, 126, 0.5);
+    -moz-box-shadow: 3px -4px 28px 10px  rgba(107, 160, 126, 0.5);
+    box-shadow: 3px -4px 28px 10px  rgba(107, 160, 126, 0.5);
+    height: 400px;
+    border-radius: 25px;
+    margin-top: 5%;
+}
+
+.data{
+    height: 400px;
+}
+
+.divider{
+    border-right: 1px solid #cccccc;
+}
+
+.form-group{
+    margin: 5%;
+    width: 95%;
+}
+
+.btn{
+    margin-left: 5%;
+}
+
+.alert{
+    display: none;
+}

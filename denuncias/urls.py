@@ -24,6 +24,7 @@ from django.views.generic import TemplateView
 from apps.user import views
 from apps.session.views import SessionView
 from apps.session.views import logoutView
+from apps.session.views import profileView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +32,6 @@ urlpatterns = [
     path('login', views.LoginView.as_view(), name="log_in"),
     path('signup', views.Signup.as_view(), name="sign_up"),
     path("session", SessionView, name="logged_in"),
-    path("logout", logoutView, name="log_out")
+    path("logout", logoutView, name="log_out"),
+    path("profile", profileView.as_view(), name="user_pro")
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

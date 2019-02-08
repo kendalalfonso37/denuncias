@@ -12,6 +12,7 @@
   <!-- favicon settings -->
   <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
   <link rel="icon" href="{% static 'favicon.ico' %}"> 
+  
   {% endblock meta %}
   
   {% block stylesheets %}
@@ -75,6 +76,10 @@
 {% block javascript %}
 {% include "base/components/_scripts.html" %}
 {% endblock javascript %}
+
+{% block js %}
+
+{% endblock js %}
 
 {% block extra_foot %}
 {% endblock extra_foot %}
