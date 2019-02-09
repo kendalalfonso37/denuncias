@@ -1,0 +1,147 @@
+{% extends "base/base.html" %}
+
+{% block page_name %}
+    Manage your profile here.
+{% endblock page_name %}
+
+{% block page_description %}
+    Please be the more honest that you can with your information.
+{% endblock page_description%}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 back">
+            <div class="row" id="show">
+                <div class="col-md-3 col-lg-3 data divider">
+                    <h6>upload your profile photo here.</h6>
+                </div>
+                <div class="col-md-9 col-lg-9 data">
+                    <form id="data_form">
+                        {% csrf_token %}
+                        <h3>Profile info</h3>
+                        <div class="form-group">
+                            <label for="first_name">First name:</label>
+                            <input type="text" value="{{request.user.first_name}}" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name">Last name:</label>
+                            <input type="text" value="{{request.user.last_name}}" class="form-control">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" value="{{request.user.email}}" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                        <button class="btn btn-warning" id="change_view">Change password</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row hidden" id="password_reset">
+                <div class="col-md-12 col-lg-12">
+                    <form id="p_change">
+                    <h3>Change password</h3>
+
+                    <div class="form-group">
+                        <label for="password">Current password:</label>
+                        <input type="password" name="password" class="form-control" alt="Fill it, please." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new_password">New password:</label>
+                        <input type="password" name="new_password" class="form-control" alt="Fill it, please." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password_again">New password again:</label>
+                        <input type="password" name="password_again" class="form-control" alt="Fill it, please." required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Save new password</button>
+                    <button class="btn btn-warning" id="cancel">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-error alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong>You must fill all the fields.
+    </div>
+
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong></strong>
+    </div>
+{% endblock content %}
+{% block js %}
+    {% load static %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript">
+        //variable
+        var form = $("#data_form"); //selector de id
+        var form_p = $("#p_change");
+        var p_btn = $("#change_view");
+        var inputs = $(".form-control");//selector de los input
+        var f_name = "", l_name = "", email = "", error = null, success = null;
+
+        $(form).submit((e)=>{ // evento submit para enviar el form
+            e.preventDefault(); // e.preventDefault para evitar que se envie el form
+
+            if($(inputs[1]).val()==""){ //verificando si el valor del input esta vacio
+                $(inputs[1]).css("border-color","Red");// si lo esta se pone el borde rojo
+            }else{ //si no esta vacio se guarda el valor
+                f_name = $(inputs[1]).val();
+            }
+
+            if($(inputs[2]).val()==""){
+                $(inputs[2]).css("border-color","Red");
+            }else{ //si no esta vacio se guarda el valor
+                l_name = $(inputs[2]).val();
+            }
+
+            if($(inputs[3]).val()==""){
+                $(inputs[3]).css("border-color","Red");
+            }else{ //si no esta vacio se guarda el valor
+                email = $(inputs[3]).val();
+            }
+
+            if(f_name != "" && l_name != "" && email != ""){ //validando que los datos recogidos no esten vacios
+            // peticion ajax con jquery
+                $.post("/profile", {first_name:f_name,last_name:l_name,email:email,csrfmiddlewaretoken:$("input[name='csrfmiddlewaretoken']").val()})
+                .done(function(data){ //si se obtiene respuesta 
+                    success = $("div").find(".alert-success"); //selector jquery para obtener el div .alert-success
+                    $(success).css("display","flex"); //selector jquery para mostrar el div
+                    $(success).find("strong").html(data.data) //selector jquery para colocar el contenido de la respuesta de la vista de django
+                })
+                .fail(function(){ // si la peticion falla
+                    alert("An error occurred!")
+                })
+ 
+            }else{ //si el contenido de los datos esta vacio, se muestra esto
+                error = $("div").find(".alert-dismissible");
+                $(error).css("display","flex");
+            }
+
+        })
+
+        $(p_btn).click(function(e){
+            e.preventDefault();
+            $("#show").addClass("hidden");
+            $("#password_reset").removeClass("hidden");
+        });
+
+        $("#cancel").click(function(){
+            $("#password_reset").addClass("hidden");
+            $("#show").removeClass("hidden");
+        })
+        
+        $(form_p).submit(function(e){
+            e.preventDefault();
+        })
+
+    </script>
+{% endblock js %}
