@@ -11,7 +11,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 back">
-            <div class="row">
+            <div class="row" id="show">
                 <div class="col-md-3 col-lg-3 data divider">
                     <h6>upload your profile photo here.</h6>
                 </div>
@@ -35,7 +35,32 @@
                             <input type="text" value="{{request.user.email}}" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-success">Save changes</button>
-                        <a class="btn btn-warning" href="#">Change password</a>
+                        <button class="btn btn-warning" id="change_view">Change password</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row hidden" id="password_reset">
+                <div class="col-md-12 col-lg-12">
+                    <form id="p_change">
+                    <h3>Change password</h3>
+
+                    <div class="form-group">
+                        <label for="password">Current password:</label>
+                        <input type="password" name="password" class="form-control" alt="Fill it, please." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new_password">New password:</label>
+                        <input type="password" name="new_password" class="form-control" alt="Fill it, please." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password_again">New password again:</label>
+                        <input type="password" name="password_again" class="form-control" alt="Fill it, please." required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Save new password</button>
+                    <button class="btn btn-warning" id="cancel">Cancel</button>
                     </form>
                 </div>
             </div>
@@ -58,6 +83,8 @@
     <script type="text/javascript">
         //variable
         var form = $("#data_form"); //selector de id
+        var form_p = $("#p_change");
+        var p_btn = $("#change_view");
         var inputs = $(".form-control");//selector de los input
         var f_name = "", l_name = "", email = "", error = null, success = null;
 
@@ -82,22 +109,38 @@
                 email = $(inputs[3]).val();
             }
 
-            if(f_name != "" && l_name != "" && email != ""){
+            if(f_name != "" && l_name != "" && email != ""){ //validando que los datos recogidos no esten vacios
+            // peticion ajax con jquery
                 $.post("/profile", {first_name:f_name,last_name:l_name,email:email,csrfmiddlewaretoken:$("input[name='csrfmiddlewaretoken']").val()})
-                .done(function(data){
-                    success = $("div").find(".alert-success");
-                    $(success).css("display","flex");
-                    $(success).find("strong").html(data.data)
+                .done(function(data){ //si se obtiene respuesta 
+                    success = $("div").find(".alert-success"); //selector jquery para obtener el div .alert-success
+                    $(success).css("display","flex"); //selector jquery para mostrar el div
+                    $(success).find("strong").html(data.data) //selector jquery para colocar el contenido de la respuesta de la vista de django
                 })
-                .fail(function(){
+                .fail(function(){ // si la peticion falla
                     alert("An error occurred!")
                 })
  
-            }else{
+            }else{ //si el contenido de los datos esta vacio, se muestra esto
                 error = $("div").find(".alert-dismissible");
                 $(error).css("display","flex");
             }
 
+        })
+
+        $(p_btn).click(function(e){
+            e.preventDefault();
+            $("#show").addClass("hidden");
+            $("#password_reset").removeClass("hidden");
+        });
+
+        $("#cancel").click(function(){
+            $("#password_reset").addClass("hidden");
+            $("#show").removeClass("hidden");
+        })
+        
+        $(form_p).submit(function(e){
+            e.preventDefault();
         })
 
     </script>
