@@ -25,6 +25,7 @@ from apps.user import views
 from apps.session.views import SessionView
 from apps.session.views import logoutView
 from apps.session.views import profileView
+from apps.quejas.views import QuejasView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,5 +34,6 @@ urlpatterns = [
     path('signup', views.Signup.as_view(), name="sign_up"),
     path("session", SessionView, name="logged_in"),
     path("logout", logoutView, name="log_out"),
-    path("profile", profileView.as_view(), name="user_pro")
+    path("profile", profileView.as_view(), name="user_pro"),
+    path("quejas", QuejasView.as_view(), name="queja_all")
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

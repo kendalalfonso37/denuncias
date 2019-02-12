@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+    {% if queja %}
+        {% for q in queja %}
+            <p>{{q.titulo}}</p>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>Warning!</strong> There are no complaints yet!
+        </div>
+    {% endif %}
+{% endblock content %}
